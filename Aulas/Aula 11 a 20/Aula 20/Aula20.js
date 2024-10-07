@@ -17,4 +17,4 @@ function MudarTexto(){
     d2.innerHTML = "Kaka"
     d3.innerHTML = "Arrascaeta"
 }
-MudarTexto()
+//MudarTexto()
