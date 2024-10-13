@@ -31,4 +31,29 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.get('/cpf/:query', (req, res) => {
+    const query = req.params.query;    
+    const sql = `
+        SELECT * 
+        FROM patient 
+        WHERE cpf LIKE ? OR name LIKE ?`;
+    const cpfQuery = `%${query}%`; 
+    const nameQuery = `%${query}%`;
+    db.query(sql, [cpfQuery, nameQuery], (err, results) => {
+        if (err) {
+            console.error('Erro ao executar a consulta:', err);
+            res.status(500).json({ error: 'Erro ao buscar paciente' });
+            return;
+        }
+        if (results.length === 0) {
+            console.log('Nenhum paciente encontrado para a consulta:', query);
+            res.status(404).json({ error: 'Paciente não encontrado' });
+            return;
+        }
+        res.json(results);
+    });
+});
+
+
+
 module.exports = router;

@@ -17,7 +17,7 @@ app.use(express.json());
 app.use('/api/consultation', consultationRoutes);
 app.use('/api/dependent', dependentRoutes);
 app.use('/api/hibernate_sequences', hibernate_sequencesRoutes);
-app.use('/api/opening_houres', opening_hoursRoutes);
+app.use('/api/opening_hours', opening_hoursRoutes);
 app.use('/api/patient', patientRoutes);
 app.use('/api/staff', staffRoutes);
 
