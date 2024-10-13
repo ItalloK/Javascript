@@ -2,6 +2,18 @@ const express = require('express');
 const db = require('../../db/database.js');
 const router = express.Router();
 
+
+router.get('/all/', (req, res) => {
+    const sql = 'SELECT * FROM opening_hours';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Erro ao buscar horários:', err);
+            return res.status(500).json({ error: 'Erro ao buscar horários' });
+        }
+        res.json(results);
+    });
+});
+
 router.get('/:date', (req, res) => {
     const dateId = req.params.date;
     const sql = 'SELECT hours FROM opening_hours WHERE hours NOT IN ( SELECT consultation_hour FROM consultation WHERE consultation_date = ?)';
@@ -18,5 +30,8 @@ router.get('/:date', (req, res) => {
         res.json(results);
     });
 });
+
+
+
 
 module.exports = router;
