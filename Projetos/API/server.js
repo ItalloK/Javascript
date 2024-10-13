@@ -10,6 +10,9 @@ const patientRoutes = require('./src/patient/patientget');
 const staffRoutes = require('./src/staff/staffget');
 const outherRoutes = require('./src/outhers/outhers');
 
+const setConsultation = require('./src/consultation/consultationset');
+const updateStaffRoute = require('./src/staff/updatestaff');
+
 const app = express();
 const PORT = 3000;
 
@@ -22,6 +25,9 @@ app.use('/api/opening_hours', opening_hoursRoutes);
 app.use('/api/patient', patientRoutes);
 app.use('/api/staff', staffRoutes);
 app.use('/api/outhers', outherRoutes);
+
+app.use('/api/setconsultation', setConsultation);
+app.use('/api/updatestaff', updateStaffRoute);
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
