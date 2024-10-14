@@ -34,21 +34,18 @@ router.get('/proximaconsulta/', (req, res) => {
         WHERE consultation.consultation_status = 'Confirmada' 
         ORDER BY consultation.consultation_date ASC;
     `;
-    
-    // Executa a consulta ao banco de dados
+
     db.query(sql, (err, results) => {
         if (err) {
-            // Tratamento de erro ao executar a consulta
             console.error("Erro ao buscar Consultas: ", err);
             return res.status(500).json({ error: "Erro ao buscar Consultas" });
         }
-        
-        // Verifica se há resultados e retorna
+
         if (results.length === 0) {
             return res.status(404).json({ message: "Nenhuma consulta confirmada encontrada" });
         }
         
-        res.json(results); // Retorna os resultados da consulta
+        res.json(results);
     });
 });
 
