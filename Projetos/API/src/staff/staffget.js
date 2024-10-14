@@ -31,4 +31,26 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.post('/login', (req, res) => {
+    const { email, senha } = req.body;
+    if (!email || !senha) {
+        return res.status(400).json({ error: 'Email e senha são obrigatórios' });
+    }
+    const sql = 'SELECT * FROM staff WHERE staff_email = ? AND staff_password = ?';
+    db.query(sql, [email, senha], (err, results) => {
+        if (err) {
+            console.error('Erro ao buscar usuário:', err);
+            res.status(500).json({ error: 'Erro ao buscar usuário' });
+            return;
+        }
+        if (results.length === 0) {
+            res.status(401).json({ error: 'Email ou senha inválidos' });
+            return;
+        }
+        res.json(results[0]);
+    });
+});
+
+
+
 module.exports = router;
