@@ -12,6 +12,7 @@ const outherRoutes = require('./src/outhers/outhers');
 
 const setConsultation = require('./src/consultation/consultationset');
 const updateStaffRoute = require('./src/staff/updatestaff');
+const setPatientRoute = require('./src/patient/patientset');
 
 const app = express();
 const PORT = 3000;
@@ -28,6 +29,7 @@ app.use('/api/outhers', outherRoutes);
 
 app.use('/api/setconsultation', setConsultation);
 app.use('/api/updatestaff', updateStaffRoute);
+app.use('/api/patientset', setPatientRoute);
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
