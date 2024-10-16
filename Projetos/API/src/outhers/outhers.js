@@ -3,7 +3,7 @@ const db = require('../../db/database.js');
 const router = express.Router();
 
 router.get('/all/', (req, res) => {
-    const sql = "SELECT consultation.*, patient.cpf, patient.name FROM consultation INNER JOIN patient ON consultation.patient_id = patient.id ORDER BY consultation.consultation_date ASC;";
+    const sql = "SELECT consultation.*, patient.cpf, patient.name FROM consultation INNER JOIN patient ON consultation.patient_id = patient.id ORDER BY consultation.date ASC;";
     db.query(sql, (err, results) => {
         if(err){
             console.error("Erro ao buscar Consultas: "+err);
@@ -15,7 +15,7 @@ router.get('/all/', (req, res) => {
 });
 
 router.get('/confirm/', (req, res) => {
-    const sql = "SELECT consultation.*, patient.cpf, patient.name FROM consultation INNER JOIN patient ON consultation.patient_id = patient.id WHERE consultation.consultation_status = 'Confirmada' ORDER BY consultation.consultation_date ASC;";
+    const sql = "SELECT consultation.*, patient.cpf, patient.name FROM consultation INNER JOIN patient ON consultation.patient_id = patient.id WHERE consultation.status = 'Confirmada' ORDER BY consultation.date ASC;";
     db.query(sql, (err, results) => {
         if(err){
             console.error("Erro ao buscar Consultas: "+err);
@@ -31,8 +31,8 @@ router.get('/proximaconsulta/', (req, res) => {
         SELECT consultation.*, patient.cpf, patient.name 
         FROM consultation 
         INNER JOIN patient ON consultation.patient_id = patient.id 
-        WHERE consultation.consultation_status = 'Confirmada' 
-        ORDER BY consultation.consultation_date ASC;
+        WHERE consultation.status = 'Confirmada' 
+        ORDER BY consultation.date ASC;
     `;
 
     db.query(sql, (err, results) => {

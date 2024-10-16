@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 router.get('/all/', (req, res) => {
-    const sql = 'SELECT * FROM opening_hours';
+    const sql = 'SELECT * FROM hour';
     db.query(sql, (err, results) => {
         if (err) {
             console.error('Erro ao buscar horários:', err);
@@ -16,7 +16,7 @@ router.get('/all/', (req, res) => {
 
 router.get('/:date', (req, res) => {
     const dateId = req.params.date;
-    const sql = 'SELECT hours FROM opening_hours WHERE hours NOT IN ( SELECT consultation_hour FROM consultation WHERE consultation_date = ?)';
+    const sql = 'SELECT hour FROM hour WHERE hour NOT IN ( SELECT hour FROM consultation WHERE date = ?)';
     db.query(sql, [dateId], (err, results) => {
         if (err) {
             console.error('Erro ao buscar horarios:', err);

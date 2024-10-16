@@ -3,15 +3,15 @@ const db = require('../../db/database.js');
 const router = express.Router();
 
 router.post('/', (req, res) => {
-    const { staff_name, staff_email, staff_password, staff_cpf, staff_phonenumber, staff_nivel, idstaff } = req.body;
+    const { name, email, password, cpf, phone_number, nivel, id } = req.body;
     
-    if (!staff_name || !staff_email || !staff_password || !staff_cpf || !staff_phonenumber || !staff_nivel || !idstaff) {
+    if (!name || !email || !password || !cpf || !phone_number || !nivel || !id) {
         return res.status(400).json({ error: "Todos os campos são obrigatórios." });
     }
     const sql = `
-        UPDATE staff SET staff_name = ?, staff_email = ?, staff_password = ?, staff_cpf = ?, staff_phonenumber = ?, staff_nivel = ? WHERE idstaff = ? 
+        UPDATE staff SET name = ?, email = ?, password = ?, cpf = ?, phone_number = ?, nivel = ? WHERE id = ? 
     `;
-    db.query(sql, [staff_name, staff_email, staff_password, staff_cpf, staff_phonenumber, staff_nivel, idstaff], (err, result) => {
+    db.query(sql, [name, email, password, cpf, phone_number, nivel, id], (err, result) => {
         if (err) {
             console.error("Erro ao inserir Consulta: " + err);
             res.status(500).json({ error: "Erro ao inserir Consulta" });

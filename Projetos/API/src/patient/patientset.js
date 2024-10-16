@@ -5,7 +5,7 @@ const router = express.Router();
 router.post('/', (req, res) => {
     const { birth_year, cpf, email, name, phone_number, password, ra } = req.body;
     
-    if (!birth_year || !cpf || !email || !name || !phone_number || !password || !ra) {
+    if (!birth_year || !cpf || !email || !name || !phone_number || !password) {
         return res.status(400).json({ error: "Todos os campos são obrigatórios." });
     }
     const sql = `

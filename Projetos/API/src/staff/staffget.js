@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     const patientId = req.params.id;
-    const sql = 'SELECT * FROM staff WHERE idstaff = ?';
+    const sql = 'SELECT * FROM staff WHERE id = ?';
     db.query(sql, [patientId], (err, results) => {
         if (err) {
             console.error('Erro ao buscar Staff:', err);
@@ -36,7 +36,7 @@ router.post('/login', (req, res) => {
     if (!email || !senha) {
         return res.status(400).json({ error: 'Email e senha são obrigatórios' });
     }
-    const sql = 'SELECT * FROM staff WHERE staff_email = ? AND staff_password = ?';
+    const sql = 'SELECT * FROM staff WHERE email = ? AND password = ?';
     db.query(sql, [email, senha], (err, results) => {
         if (err) {
             console.error('Erro ao buscar usuário:', err);
